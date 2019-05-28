@@ -1,0 +1,18 @@
+body {
+  positon: relative
+}
+
+.nav {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  border: 1px solid gray;
+  
+  .active {
+    color: red;
+  }
+}
+
+.content {
+  margin-left: 130px;
+}
