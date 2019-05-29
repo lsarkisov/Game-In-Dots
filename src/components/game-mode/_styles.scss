@@ -1,11 +1,20 @@
-.game-mode_list {
-    list-style: none;
-
-    li {
-        display: table;
+.game-mode {
+    button {
+        background-color: $gray-midium;
+        border-color: $gray-midium;
+        color: $gray-dark;
+        width: 100%;
     }
 
-    h2, p {
-        display: table-cell;
+    &_list {
+        list-style: none;
+
+        li {
+            display: table;
+        }
+
+        h2, p {
+            display: table-cell;
+        }
     }
 }

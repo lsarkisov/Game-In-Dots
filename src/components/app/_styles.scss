@@ -1,0 +1,28 @@
+.game {
+
+    button {
+        width: 100%;
+    }
+
+    &-button {
+        background-color: $gray-dark;
+        border-color: $gray-dark;
+        color: $white-custom;
+    }
+
+    &-alert {
+        margin: 10px 0;
+    }
+
+    @include media-breakpoint-down(md) {
+        &-controlls {
+            .col-sm-12 {
+                margin-bottom: 10px;
+            }
+        }
+
+        &-button {
+            width: 100%;
+        }
+    }
+}

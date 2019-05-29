@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Alert } from 'react-bootstrap';
 import GameMode from '../../containers/game-mode';
 import LeadersBoard from '../../containers/leader-board';
+import GameBoard from '../../containers/game-board';
 import UserName from '../user-name';
 
 class App extends Component {
@@ -10,27 +12,38 @@ class App extends Component {
     setUserNameAction(name);
   }
 
+  onPlay = () => {
+    console.log('PLAY');
+  }
+
   render() {
     const { name } = this.props;
     return (
-      <div className="container">
-        <div className="col-6">
-          <h1>Game</h1>
-          <div>
-            <GameMode />
-            <UserName onSetUserName={this.onSetUserName} />
+      <div className="container game">
+        <div className="row">
+          <div className="col-6">
+            <div className="row game-controlls">
+              <div className="col-lg-4 col-md-12 col-sm-12"><GameMode /></div>
+              <div className="col-lg-6 col-md-12 col-sm-12"><UserName onSetUserName={this.onSetUserName} /></div>
+              <div className="col-lg-2 col-md-12 col-sm-12"><Button variant="secondary" onClick={this.onPlay} className="game-button">Play</Button></div>
+            </div>
+            <div>
+              {name
+                && (
+                <Alert className="game-alert" variant="success">
+                  Hi,
+                  { ` ${name}` }
+                </Alert>
+                )
+              }
+            </div>
+            <div>
+              <GameBoard />
+            </div>
           </div>
-          {name
-            && (
-            <p>
-              Hi,
-              { ` ${name}` }
-            </p>
-            )
-          }
-        </div>
-        <div className="col-6">
-          <LeadersBoard />
+          <div className="col-6">
+            <LeadersBoard />
+          </div>
         </div>
       </div>
     );

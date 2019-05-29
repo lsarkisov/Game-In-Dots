@@ -11,17 +11,17 @@ class LeaderBoard extends Component {
   render() {
     const { leaders } = this.props;
     return (
-      <div>
+      <div className="leader-board">
         {leaders && leaders.length > 0
           && (
             <>
               <h2>Leader Board</h2>
-              <ul>
+              <ul className="leader-board_list">
                 {leaders.map(leader => (
-                  <li className="leader" key={uniqueKey()}>
-                    <span className="leader_name">{leader.name}</span>
-                    <span className="leader_data">{leader.data}</span>
-                    <span className="leader_time">{leader.time}</span>
+                  <li className="leader-board_list" key={uniqueKey()}>
+                    <span className="leader-board_name">{leader.name}</span>
+                    <span className="leader-board_data">{leader.date}</span>
+                    <span className="leader-board_time">{leader.time}</span>
                   </li>
                 ))}
               </ul>

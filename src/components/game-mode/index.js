@@ -17,10 +17,10 @@ class GameMode extends Component {
   render() {
     const { modes } = this.props;
     return (
-      <div>
+      <div className="game-mode">
         <Dropdown>
-          <Dropdown.Toggle variant="default" id="dropdown-basic">
-            Dropdown Button
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            Pick game mode
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="game-mode_list">
