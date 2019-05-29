@@ -1,11 +1,43 @@
-import React from 'react';
-import Settings from '../../containers/game-mode';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import GameMode from '../../containers/game-mode';
+import UserName from '../user-name';
 
-const App = () => (
-  <>
-    <h1>Settings</h1>
-    <Settings />
-  </>
-);
+class App extends Component {
+  onSetUserName = (name) => {
+    const { setUserNameAction } = this.props;
+    setUserNameAction(name);
+  }
+
+  render() {
+    const { name } = this.props;
+    return (
+      <>
+        <h1>Game</h1>
+        <div>
+          <GameMode />
+          <UserName onSetUserName={this.onSetUserName} />
+        </div>
+        {name
+          && (
+          <p>
+            Hi,
+            { ` ${name}` }
+          </p>
+          )
+        }
+      </>
+    );
+  }
+}
+
+App.defaultProps = {
+  name: '',
+};
+
+App.propTypes = {
+  setUserNameAction: PropTypes.func.isRequired,
+  name: PropTypes.string,
+};
 
 export default App;
