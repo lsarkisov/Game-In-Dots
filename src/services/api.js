@@ -11,7 +11,7 @@ function callApi(endpoint, header) {
     .catch(error => error);
 }
 
-export const getGameSettings = () => callApi('/game-settings.json', {
+export const getGameModes = () => callApi('/game-settings.json', {
   method: 'get',
 });
 

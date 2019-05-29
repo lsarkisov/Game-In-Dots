@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import settings from './settings';
+import modes from './game-modes';
 
 const reducers = combineReducers({
-  settings,
+  modes,
 });
 
 export default reducers;

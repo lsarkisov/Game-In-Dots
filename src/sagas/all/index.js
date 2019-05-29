@@ -4,14 +4,14 @@ import {
 import * as types from '../../const';
 import * as services from '../../services/api';
 
-function* getSettings() {
-  const payload = yield call(() => services.getGameSettings());
-  yield put({ type: types.GET_SETTINGS_SUCCESS, payload });
+function* getGameModes() {
+  const payload = yield call(() => services.getGameModes());
+  yield put({ type: types.GET_GAME_MODES_SUCCESS, payload });
 }
 
 function* startToGetAllFiles() {
   yield takeEvery(
-    types.GET_SETTINGS_START, getSettings,
+    types.GET_GAME_MODES_START, getGameModes,
   );
 }
 
