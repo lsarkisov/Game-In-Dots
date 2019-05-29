@@ -15,7 +15,7 @@ export const getGameModes = () => callApi('/game-settings.json', {
   method: 'get',
 });
 
-export const getWinners = () => callApi('/winners', {
+export const getLeaders = () => callApi('/winners.json', {
   method: 'get',
 });
 

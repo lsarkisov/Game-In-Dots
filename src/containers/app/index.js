@@ -3,9 +3,11 @@ import App from '../../components/app';
 import setUserNameAction from '../../actions/user-name';
 
 const mapStateToProps = (state) => {
+  const { mode } = state.modes;
   const { name } = state.userName;
   return {
     name,
+    mode,
   };
 };
 

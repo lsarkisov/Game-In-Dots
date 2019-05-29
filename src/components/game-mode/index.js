@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Dropdown } from 'react-bootstrap';
 import uniqueKey from '../../utils';
 
 class GameMode extends Component {
@@ -8,25 +9,35 @@ class GameMode extends Component {
     startGetGameModesAction();
   }
 
+  onModeSelect = (i) => {
+    const { modes, onGameModeSelectAction } = this.props;
+    onGameModeSelectAction(modes[i]);
+  }
+
   render() {
     const { modes } = this.props;
     return (
-      <>
-        {modes && modes.length
-          && (
-            <ul>
-              {
-                modes.map(mode => (
-                  <li key={`key-${uniqueKey()}`}>
-                    <h2>{mode.field}</h2>
-                    <p>{mode.delay}</p>
-                  </li>
-                ))
-              }
-            </ul>
-          )
-        }
-      </>
+      <div>
+        <Dropdown>
+          <Dropdown.Toggle variant="default" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className="game-mode_list">
+            {modes && modes.length
+              && modes.map((mode, i) => (
+                <Dropdown.Item
+                  key={`key-${uniqueKey()}`}
+                  onClick={() => this.onModeSelect(i)}
+                >
+                  <h2>{mode.field}</h2>
+                  <p>{mode.delay}</p>
+                </Dropdown.Item>
+              ))
+            }
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
     );
   }
 }
@@ -37,6 +48,7 @@ GameMode.defaultProps = {
 
 GameMode.propTypes = {
   startGetGameModesAction: PropTypes.func.isRequired,
+  onGameModeSelectAction: PropTypes.func.isRequired,
   modes: PropTypes.arrayOf(PropTypes.shape({
     field: PropTypes.number,
     delay: PropTypes.number,

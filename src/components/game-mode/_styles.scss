@@ -1,0 +1,11 @@
+.game-mode_list {
+    list-style: none;
+
+    li {
+        display: table;
+    }
+
+    h2, p {
+        display: table-cell;
+    }
+}

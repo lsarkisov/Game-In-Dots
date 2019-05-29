@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import GameMode from '../../components/game-mode';
-import { startGetGameModesAction } from '../../actions/game-modes';
+import {
+  startGetGameModesAction,
+  onGameModeSelectAction,
+} from '../../actions/game-modes';
 
 const mapStateToProps = (state) => {
   const { modes } = state.modes;
@@ -9,7 +12,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { startGetGameModesAction };
+const mapDispatchToProps = {
+  startGetGameModesAction,
+  onGameModeSelectAction,
+};
 
 export default connect(
   mapStateToProps,

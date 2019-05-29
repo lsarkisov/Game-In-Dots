@@ -15,8 +15,20 @@ function* startToGetAllFiles() {
   );
 }
 
+function* getLeaders() {
+  const payload = yield call(() => services.getLeaders());
+  yield put({ type: types.GET_LEADERS_SUCCESS, payload });
+}
+
+function* startToGetLeaders() {
+  yield takeEvery(
+    types.GET_LEADERS_START, getLeaders,
+  );
+}
+
 export default function* rootSaga() {
   yield all([
     startToGetAllFiles(),
+    startToGetLeaders(),
   ]);
 }
