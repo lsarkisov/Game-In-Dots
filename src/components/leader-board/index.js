@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import uniqueKey from '../../utils';
+import { uniqueKey } from '../../utils';
 
 class LeaderBoard extends Component {
   componentDidMount() {

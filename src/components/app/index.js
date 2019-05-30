@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="container game">
         <div className="row">
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <div className="row game-controlls">
               <div className="col-lg-4 col-md-12 col-sm-12"><GameMode /></div>
               <div className="col-lg-6 col-md-12 col-sm-12"><UserName onSetUserName={this.onSetUserName} /></div>
@@ -41,7 +41,7 @@ class App extends Component {
               <GameBoard />
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <LeadersBoard />
           </div>
         </div>

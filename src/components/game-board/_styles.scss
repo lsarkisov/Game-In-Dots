@@ -1,26 +1,27 @@
-.leader-board {
-    h2 {
-        margin-bottom: 20px;
-        color: $gray-dark;
+.game-board {
+    margin: 20px 0;
+    border: 1px solid $gray-midium;
+
+    &_row {
+        display: flex;
     }
 
-    &_list {
-        li {
-            background-color: $gray-midium;
-            padding: 20px 10px;
-            margin-bottom: 5px;
-            color: $gray-dark;
-            font-size: 1.5rem;
-            display: table
-        }
-
-        span {
-            display: table-cell;
-            padding: 0 5px;
-        }
+    &_cell {
+        flex: 1;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid $gray-midium;
     }
 
-    &_name {
-        width: 60%;
+    .active {
+        background-color: $blue;
+    }
+
+    .hit {
+        background-color: $green !important;
+    }
+
+    .miss {
+        background-color: $red !important;
     }
 }

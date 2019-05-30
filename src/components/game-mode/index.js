@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
-import uniqueKey from '../../utils';
+import { uniqueKey } from '../../utils';
 
 class GameMode extends Component {
   componentDidMount() {
