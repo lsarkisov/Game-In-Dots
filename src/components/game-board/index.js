@@ -12,7 +12,7 @@ class GameBoard extends Component {
   state = {
     fields: 5,
     squares: null,
-    active: [1, 3],
+    active: [],
     selected: [],
     hit: [],
     miss: [],
@@ -60,13 +60,23 @@ class GameBoard extends Component {
     }
     const { fields, selected, hit, miss } = this.state;
     const result = selected.filter(item => item.length && activeCell(iRow, iCell, item));
-    
+
     if (fields * fields / 2 < (hit.length || miss.length)) {
-      alert('Game over!');
       clearInterval(interval);
+      if (hit.length > miss) {
+        alert('Game over, you are winner!');
+      } else {
+        alert('Game over, you lost');
+      }
+      this.setState({
+        active: [],
+        selected: [],
+        hit: [],
+        miss: [],
+      });
       return false;
     }
-    
+
     if (!result.length) {
       this.setState({
         selected: [...selected, [iRow, iCell]],
