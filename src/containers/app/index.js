@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import App from '../../components/app';
 import setUserNameAction from '../../actions/user-name';
+import { onGameStartAction } from '../../actions/game-play';
 
 const mapStateToProps = (state) => {
   const { mode } = state.modes;
@@ -11,7 +12,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { setUserNameAction };
+const mapDispatchToProps = { setUserNameAction, onGameStartAction };
 
 export default connect(
   mapStateToProps,

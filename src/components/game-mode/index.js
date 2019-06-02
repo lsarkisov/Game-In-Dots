@@ -30,8 +30,15 @@ class GameMode extends Component {
                   key={`key-${uniqueKey()}`}
                   onClick={() => this.onModeSelect(i)}
                 >
-                  <h2>{mode.field}</h2>
-                  <p>{mode.delay}</p>
+                  <h2>
+                    mode
+                    {mode.field}
+                    -
+                  </h2>
+                  <p>
+                    {mode.delay}
+                    ms
+                  </p>
                 </Dropdown.Item>
               ))
             }

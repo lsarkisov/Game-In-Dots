@@ -13,7 +13,8 @@ class App extends Component {
   }
 
   onPlay = () => {
-    console.log('PLAY');
+    const { onGameStartAction } = this.props;
+    onGameStartAction();
   }
 
   render() {
@@ -60,6 +61,7 @@ App.defaultProps = {
 
 App.propTypes = {
   setUserNameAction: PropTypes.func.isRequired,
+  onGameStartAction: PropTypes.func.isRequired,
   name: PropTypes.string,
   mode: PropTypes.shape({
     field: PropTypes.number,

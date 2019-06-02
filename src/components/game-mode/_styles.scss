@@ -9,12 +9,19 @@
     &_list {
         list-style: none;
 
-        li {
+        .dropdown-item {
             display: table;
         }
 
         h2, p {
             display: table-cell;
+            width: 60%;
+            font-size: 1rem;
+        }
+
+        p {
+            width: 40%;
+            text-align: right;
         }
     }
 }

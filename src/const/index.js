@@ -9,3 +9,6 @@ export const GET_LEADERS_ERROR = 'GET_LEADERS_ERROR';
 export const SET_USER_NAME = 'SET_USER_NAME';
 
 export const ON_GAME_MODE_SELECT = 'ON_GAME_MODE_SELECT';
+
+export const ON_GAME_START = 'ON_GAME_START';
+export const ON_GAME_STOP = 'ON_GAME_STOP';

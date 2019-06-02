@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { uniqueKey, randomeRange } from '../../utils';
 import Square from './square';
 
@@ -10,8 +11,9 @@ let interval;
 
 class GameBoard extends Component {
   state = {
-    fields: 5,
+    field: 5,
     squares: null,
+    start: false,
     active: [],
     selected: [],
     hit: [],
@@ -20,30 +22,66 @@ class GameBoard extends Component {
 
   componentDidMount() {
     this.addSquares();
+  }
+
+  componentDidUpdate() {
+    const { play, mode } = this.props;
+    const { start, field } = this.state;
+
+    if (play && play !== start) {
+      this.onPlay();
+    }
+
+    if (mode && mode.field !== field) {
+      this.addSquares(mode.field);
+    }
+  }
+
+  onPlay = () => {
+    const { play, modes, mode } = this.props;
+    let t;
+
+    if (mode) {
+      const { delay, field } = mode;
+      t = delay;
+      this.setState({ field });
+      this.addSquares(field);
+    } else {
+      t = modes[0].delay;
+      this.setState({ field: modes[0].field });
+      this.addSquares(modes[0].field);
+    }
+
+    this.setState({
+      start: play,
+    });
 
     interval = setInterval(() => {
-      const { fields, selected } = this.state;
+      const { field, selected } = this.state;
       let active;
       let result = true;
+
       while (result) {
-        active = [randomeRange(fields), randomeRange(fields)];
-        result = !!selected.filter(s => s[0] === active[0] && s[1] === active[1]).length;
+        active = [randomeRange(field), randomeRange(field)];
+        result = !!selected.filter(
+          s => s[0] === active[0] && s[1] === active[1],
+        ).length;
       }
 
       this.setState({
         active,
       });
-    }, 1500);
+    }, t);
   }
 
-  addSquares = () => {
-    const { fields } = this.state;
-    const len = fields * fields + 1;
+  addSquares = (f) => {
+    const field = !f ? this.state.field : f;
+    const len = field * field + 1;
     const squares = [];
     let rows = [];
 
     for (let i = 1; i < len; i++) {
-      if (i % fields === 0) {
+      if (i % field === 0) {
         rows.push(<Square status={i} />);
         squares.push(rows);
         rows = [];
@@ -51,29 +89,30 @@ class GameBoard extends Component {
         rows.push(<Square status={i} />);
       }
     }
-    this.setState({ squares });
+    this.setState({ field: f, squares });
   }
 
   onClick = (iRow, iCell, isActive, isHit, isMiss) => {
     if (isHit || isMiss) {
       return false;
     }
-    const { fields, selected, hit, miss } = this.state;
+    const {
+      field, selected, hit, miss, start,
+    } = this.state;
+
+    if (!start) {
+      return false;
+    }
+
     const result = selected.filter(item => item.length && activeCell(iRow, iCell, item));
 
-    if (fields * fields / 2 < (hit.length || miss.length)) {
-      clearInterval(interval);
+    if (field * field / 2 < hit.length || field * field / 2 < miss.length) {
       if (hit.length > miss) {
         alert('Game over, you are winner!');
       } else {
         alert('Game over, you lost');
-      }
-      this.setState({
-        active: [],
-        selected: [],
-        hit: [],
-        miss: [],
-      });
+      } 
+      this.onStopGame();
       return false;
     }
 
@@ -84,10 +123,26 @@ class GameBoard extends Component {
         miss: !isActive ? [...miss, [iRow, iCell]] : [...miss],
       });
     }
+    return true;
+  }
+
+  onStopGame = () => {
+    clearInterval(interval);
+    this.setState({
+      active: [],
+      selected: [],
+      hit: [],
+      miss: [],
+      start: false,
+    });
+    this.props.onGameStopAction();
   }
 
   render() {
-    const { squares, active, hit, miss } = this.state;
+    const {
+      squares, active, hit, miss,
+    } = this.state;
+
     return (
       <div className="game-board">
         {squares && squares.length
@@ -123,3 +178,23 @@ class GameBoard extends Component {
 }
 
 export default GameBoard;
+
+
+GameBoard.defaultProps = {
+  modes: null,
+  mode: null,
+  play: false,
+};
+
+GameBoard.propTypes = {
+  modes: PropTypes.arrayOf(PropTypes.shape({
+    field: PropTypes.number.isRequired,
+    delay: PropTypes.number.isRequired,
+  })),
+  mode: PropTypes.shape({
+    field: PropTypes.number.isRequired,
+    delay: PropTypes.number.isRequired,
+  }),
+  play: PropTypes.bool,
+  onGameStopAction: PropTypes.func.isRequired,
+};

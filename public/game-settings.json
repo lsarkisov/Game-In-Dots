@@ -1,4 +1,4 @@
 [
-    { "field": 1, "delay": 1 },
-    { "field": 2, "delay": 2 }
+    { "field": 5, "delay": 1500 },
+    { "field": 7, "delay": 1000 }
 ]
