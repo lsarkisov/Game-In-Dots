@@ -111,7 +111,7 @@ class GameBoard extends Component {
         alert('Game over, you are winner!');
       } else {
         alert('Game over, you lost');
-      } 
+      }
       this.onStopGame();
       return false;
     }
@@ -127,6 +127,8 @@ class GameBoard extends Component {
   }
 
   onStopGame = () => {
+    const { onGameStopAction } = this.props;
+
     clearInterval(interval);
     this.setState({
       active: [],
@@ -135,7 +137,7 @@ class GameBoard extends Component {
       miss: [],
       start: false,
     });
-    this.props.onGameStopAction();
+    onGameStopAction();
   }
 
   render() {
@@ -162,11 +164,16 @@ class GameBoard extends Component {
                         ${isHit ? 'hit' : ''}
                         ${isMiss ? 'miss' : ''}
                       `}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => this.onClick(iRow, iCell, isActive, isHit, isMiss)}
+                      onKeyPress={() => {
+                        // ... TODO ;)
+                      }}
                     >
                       { square }
                     </div>
-                  )
+                  );
                 })
               }
             </div>
