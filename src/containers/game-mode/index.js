@@ -7,8 +7,10 @@ import {
 
 const mapStateToProps = (state) => {
   const { modes } = state.modes;
+  const { play } = state.gamePlay;
   return {
     modes,
+    play,
   };
 };
 

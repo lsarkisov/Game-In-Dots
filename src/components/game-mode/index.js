@@ -15,9 +15,9 @@ class GameMode extends Component {
   }
 
   render() {
-    const { modes } = this.props;
+    const { modes, play } = this.props;
     return (
-      <div className="game-mode">
+      <div className={`game-mode ${play ? 'game-mode_play' : ''}`}>
         <Dropdown>
           <Dropdown.Toggle variant="secondary" id="dropdown-basic">
             Pick game mode
@@ -51,6 +51,7 @@ class GameMode extends Component {
 
 GameMode.defaultProps = {
   modes: null,
+  play: false,
 };
 
 GameMode.propTypes = {
@@ -60,6 +61,7 @@ GameMode.propTypes = {
     field: PropTypes.number,
     delay: PropTypes.number,
   })),
+  play: PropTypes.bool,
 };
 
 export default GameMode;
